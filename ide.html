@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Codeboard Online IDE</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="header-grid-container">
+            <div class="logo">BKSEC</div>
+            <div class="logout">Log out</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="desc">
+            <h1>Task</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora esse inventore, doloribus,
+                repudiandae quos nesciunt nisi ipsam optio cupiditate quis consequuntur iure, qui ullam
+                necessitatibus quia odit quasi minus! Sunt!</p>
+        </div>
+        <div class="editor-part">
+            <div class="editor" id="editor"># Write your code here !</div>
+
+            <div class="button-container">
+                <!-- <button class="btn" onclick="executeCode()"> Run </button> -->
+                <button class="btn-submit" onclick=""> Submit Code </button>
+            </div>
+
+            <div class="output"></div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/lib/ace.js"></script>
+    <script src="js/lib/theme-monokai.js"></script>
+    <script src="js/ide.js"></script>
+
+</body>
+
+</html>
