@@ -4,32 +4,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Codeboard Online IDE</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
-    <div class="header">
-        <div class="header-grid-container">
-            <div class="logo">BKSEC</div>
-            <div class="logout">Log out</div>
+    <nav class="sticky">
+        <div class="nav-content">
+            <div class="logo">
+                <a href="/home"><img class="logo-image" src="Logo_CTF.png" alt="BKSEC Academy"></a>
+            </div>
+            <ul class="nav-links">
+                <li>
+                    <a href="/logout">
+                        <img class="logout-image" src="logout.png" alt="Logout">
+                    </a>
+                </li>
+                <li>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-switch">
+                        <span class="slider round"></span>
+                    </label>
+                </li>
+            </ul>
         </div>
-    </div>
 
+    </nav>
+    <section class="home"></section>
     <div class="container">
-        <div class="desc">
-            <h1>Task</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora esse inventore, doloribus,
-                repudiandae quos nesciunt nisi ipsam optio cupiditate quis consequuntur iure, qui ullam
-                necessitatibus quia odit quasi minus! Sunt!</p>
+        <div class="desc sketchy">
+            <div class="inner">
+                <h2>Welcome to BKSEC Academy</h2>
+                <p>Hi {{ username }}, did you know that a well-rounded security expert possesses not only security
+                    expertise but also strong programming skills? To hone these skills, we present you with a
+                    programming
+                    challenge! Solve it and claim your flag as a reward.</p>
+                <h2>Task</h2>
+                <p>Write a Python program that, given a positive integer, can identify and print all of its prime
+                    factors.</p>
+                <h3>Example:</h3>
+                <div class="example">
+                    <p>Input: 12 | Output: 2 3</p>
+                    <p>Input: 315 | Output: 3 5 7</p>
+                    <p>Input: 100 | Output: 2 5</p>
+                </div>
+                <h2>Important Notes</h2>
+                <p>Python is the only language for this challenge due to its efficiency in handling large numbers.</p>
+                <p>You will need to implement your own logic without relying on built-in functions or libraries</p>
+                <p>Avoid using potentially risky functions like <code>eval, exec, os.system</code></p>
+            </div>
         </div>
         <div class="editor-part">
             <div class="editor" id="editor"># Write your code here !</div>
 
             <div class="button-container">
-                <!-- <button class="btn" onclick="executeCode()"> Run </button> -->
-                <button class="btn-submit" onclick=""> Submit Code </button>
+                <button class="button-7" role="button" onclick="getFlag()">Get Flag</button>
+                <button class="button-7" role="button" onclick="submit()">Submit Code</button>
+                <button class="button-7" role="button" onclick="debug()">Debug</button>
             </div>
 
             <div class="output"></div>
@@ -38,7 +70,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="js/lib/ace.js"></script>
-    <script src="js/lib/theme-monokai.js"></script>
+    <script src="/js/lib/theme-crimson_editor.js"></script>
     <script src="js/ide.js"></script>
 
 </body>
