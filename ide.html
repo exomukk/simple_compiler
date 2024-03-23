@@ -76,6 +76,68 @@
     <script src="./static/js/lib/theme-crimson_editor.js"></script>
     <script src="./static/js/ide.js"></script>
 
+    <script>
+        function submit() {
+            let code = editor.getValue();
+            $.ajax({
+                url: '/submit',
+                type: 'POST',
+                data: { code: code },
+                success: function (response) {
+                    $("#dialog-text").text(response);
+                    $("#dialog-title").text("Submission Status");
+                    window.dialog.showModal();
+                }
+            });
+        }
+
+        function getFlag() {
+            $.ajax({
+                url: '/getflag',
+                type: 'POST',
+                success: function (response) {
+                    $("#dialog-text").text(response);
+                    $("#dialog-title").text("Flag");
+                    window.dialog.showModal();
+                }
+            });
+        }
+
+        function debug() {
+            let code = editor.getValue();
+            $.ajax({
+                url: '/godebug',
+                type: 'POST',
+                data: { code: code },
+                success: function (output) {
+                    if (output.status == "success") {
+                        $(".output").css("color", "black");
+                        $(".output").each(function () {
+                            var oldText = output.message;
+                            var newText = oldText.replace(/\n/g, "<br />");
+                            $(this).html(newText);
+                        });
+                    } else {
+                        $(".output").css("color", "red");
+                        $(".output").each(function () {
+                            var oldText = output.message;
+                            var newText = oldText.replace(/\n/g, "<br />");
+                            $(this).html(newText);
+                        });
+                    }
+                }
+            });
+        }
+
+
+    </script>
+
+    <dialog id="dialog">
+        <h2 id="dialog-title">Submission</h2>
+        <p id="dialog-text">You need to submit your code first.</p>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
+
 </body>
 
 </html>

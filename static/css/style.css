@@ -31,18 +31,6 @@ body {
   font-family: sans-serif;
 }
 
-/* .control-panel {
-    background: lightgray;
-    text-align: right;
-    padding: 4px;
-    font-family: sans-serif;
-}
-
-.languages {
-    background: white;
-    border: 1px solid gray;
-} */
-
 #editor {
   height: 400px;
   border: 2px solid gray;
@@ -54,13 +42,6 @@ body {
   padding: 4px;
 }
 
-/* .btn {
-    background: #57a958;
-    color: white;
-    padding: 8px;
-    border: 0;
-} */
-
 .btn-submit {
   background: gray;
   color: white;
@@ -69,7 +50,6 @@ body {
 }
 
 .output {
-  /* background-color: var(--example-bg-color); */
   padding: 4px;
   border: 2px solid gray;
   border-radius: 5px;
@@ -99,12 +79,10 @@ body {
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
   padding: 10px;
-  /* Margin each side */
   margin: 10px;
 }
 
 .desc {
-  /* background-color: var(--example-bg-color); */
   border: 2px solid gray;
   border-radius: 6px;
   width: 100%;
@@ -116,7 +94,6 @@ body {
 }
 
 .desc .inner {
-  /* overflow-y: scroll; */
   height: 75vh;
   padding: 10px;
 }
@@ -400,6 +377,7 @@ dialog {
     font-weight: 600;
     font-size: 2rem;
     padding-bottom: 1rem;
+    color: orange;
   }
 
   p {
@@ -424,55 +402,6 @@ dialog {
     opacity: 1;
   }
 }
-
-/* CSS font Blinker */
-/* .blinker-thin {
-  font-family: "Blinker", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-.blinker-extralight {
-  font-family: "Blinker", sans-serif;
-  font-weight: 200;
-  font-style: normal;
-}
-
-.blinker-light {
-  font-family: "Blinker", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.blinker-regular {
-  font-family: "Blinker", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.blinker-semibold {
-  font-family: "Blinker", sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.blinker-bold {
-  font-family: "Blinker", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.blinker-extrabold {
-  font-family: "Blinker", sans-serif;
-  font-weight: 800;
-  font-style: normal;
-}
-
-.blinker-black {
-  font-family: "Blinker", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-} */
 
 h1 {
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
