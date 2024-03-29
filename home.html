@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>BKSEC</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet"
+        href="https://www.online-python.com/assets/bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./static/css/style.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!-- jQuery 3 -->
+    <script src="https://www.online-python.com/assets/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="https://www.online-python.com/assets/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script src="./static/js/ide.js"></script>
+
+    <!-- Ace Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.8/ace.js" type="text/javascript"
+        charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.8/ext-language_tools.min.js" type="text/javascript"
+        charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.8/ext-settings_menu.min.js" type="text/javascript"
+        charset="utf-8"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.8/ext-keybinding_menu.min.js"
+        type="text/javascript" charset="utf-8"></script>
+
+    <!-- Split JS -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.6.2/split.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+</head>
+
+<body>
+    <div>
+        <nav class="nav navbar-top primary">
+            <h1 class="nav_logo">
+                <a href="/"><img src="./static/images/Logo_CTF.png" alt="IDE" width="auto" height="34"
+                        style="margin-top: -3px"></a>
+            </h1>
+        </nav>
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <div id="div1" style="min-width: 0; word-wrap: break-word;">
+                <div class="container" id="container">
+                    <div id="header-control"></div>
+                    <div class="description">
+                        <h1>Welcome to BKSEC Academy</h1>
+                        <p>Hi {{ username }}, did you know that a well-rounded security expert possesses not only
+                            security
+                            expertise but also strong programming skills? To hone these skills, we present you with a
+                            programming
+                            challenge! Solve it and claim your flag as a reward.</p>
+                        <h2>Task</h2>
+                        <p>Write a Python program that, given a positive integer, can identify and print all of its
+                            prime
+                            factors.</p>
+                        <h3>Example:</h3>
+                        <div class="example">
+                            <p>Input: 12 | Output: 2 3</p>
+                            <p>Input: 315 | Output: 3 5 7</p>
+                            <p>Input: 100 | Output: 2 5</p>
+                        </div>
+                        <h2>Important Notes</h2>
+                        <p>Python is the only language for this challenge due to its efficiency in handling large
+                            numbers.</p>
+                        <p>You will need to implement your own logic without relying on built-in functions or libraries
+                        </p>
+                        <p>Avoid using potentially risky functions like <code>eval, exec, os.system</code></p>
+                    </div>
+                </div>
+            </div>
+            <div id="div2" style="min-width: 0;">
+                <div class="container" id="container">
+                    <div id="header-control">
+                        <div class="btn-group setting-btn" role="group">
+                            <button type="button" class="btn btn-default" id="toggle-theme" data-toggle="tooltip"
+                                data-container="body" data-placement="left" title="Change Theme"><i
+                                    class="fas fa-moon fa-lg"></i></button>
+                            <button type="button" class="btn btn-default" onclick="" id="info" data-toggle="tooltip"
+                                data-container="body" data-placement="left" title="Logout"><i
+                                    class="fas fa-sign-out-alt"></i></button>
+                        </div>
+                    </div>
+                    <div id="mi" class="split">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="active" id="editor-1"><a data-toggle="tab"></a></li>
+                        </ul>
+
+                        <div id="editor"></div>
+                        <div class="boxed" id="editor_footer"></div>
+
+                        <div class="control-bar">
+                            <div id="control-btn">
+                                <button type="button" class="btn btn-success btn-sm" id="run-btn" onclick="run_python()"
+                                    data-toggle="popover" data-placement="bottom" data-trigger="hover"
+                                    data-content="F8"><i class="fa fa-play"></i>&ensp;<strong>Run</strong></button>
+                                <button type="button" class="btn btn-default btn-sm" id="submit-btn" onclick="submit()"
+                                    data-toggle="popover" data-placement="bottom" data-trigger="hover"
+                                    data-content="Sumbit Code"><i class="far fa-paper-plane"></i>&ensp;<strong>Submit
+                                        Code</strong></button>
+                                <button type="button" class="btn btn-warning btn-sm" id="getflag-btn" onclick="getFlag()"
+                                    data-toggle="popover" data-placement="bottom" data-trigger="hover"
+                                    data-content="Get Flag"><i class="fas fa-flag"></i>&ensp;<strong>Get
+                                        Flag</strong></button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="d" class="split">
+                        <div class="boxed1" id="output_header">
+                            <div id="output-status"></div>
+                        </div>
+
+                        <div id="terminal">
+                            <div id="progress-status"></div>
+                            <div class="boxed2" id="output">
+                                <div class="wrapper" id="wrap"></div>
+                                <form id="term-form">
+                                    <input id="term-input" autocomplete="off">
+                                </form>
+                            </div>
+
+                            <!-- <div id="terminal-ad"> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        ace.require("ace/ext/language_tools");
+        var editor = ace.edit("editor");
+        ace.require('ace/ext/settings_menu').init(editor);
+        var editor_cnt = 1, editor_index = 1, active_editor = 1, editor_session = [];
+        var request, init_ts, open_file_name;
+        var lang = 'python3';
+        default_content = "\
+\n\
+# Write your code here !\n\
+";
+        var prev_result = 'in';
+        var site_url = "https://www.online-python.com/"
+        var base_url = "https://www.online-python.com/"
+        var share_url = base_url;
+        var exe_cnt = 0;
+        var addthis_share = {
+            url: share_url,
+            // title: "THE TITLE",
+            // description: "THE DESCRIPTION",
+            // media: "THE IMAGE"
+        }
+
+
+        var isMobile = window.orientation > -1;
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "preventOpenDuplicates": true,
+            "maxOpened": 1,
+            "onclick": null,
+            "showDuration": "100",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            // "showMethod": "show",
+            // "hideMethod": "hide"
+        };
+
+        var instance = Split(['#mi', '#d'], {
+            direction: 'vertical',
+            sizes: [66, 28],
+            gutterSize: 5,
+            cursor: 'row-resize',
+            minSize: [0, 180],
+            onDrag: function () {
+                editor.resize();
+            },
+        });
+
+        // function term_expand() {
+        //     var element = document.getElementById('term-expand').innerHTML;
+        //     if (element === '<i class="fas fa-expand-alt fa-lg"></i>') {
+        //         instance.setSizes([0, 94]);
+        //         editor.resize();
+        //         document.getElementById('term-expand').innerHTML = '<i class="fas fa-compress-alt fa-lg"></i>'
+        //     } else {
+        //         instance.setSizes([66, 28]);
+        //         editor.resize();
+        //         document.getElementById('term-expand').innerHTML = '<i class="fas fa-expand-alt fa-lg"></i>'
+        //     }
+        //     $('#term-expand').blur();
+        //     $('[data-toggle="tooltip"]').tooltip('hide');
+        // }
+
+        editor.setOptions({
+            enableBasicAutocompletion: true, // the editor completes the statement when you hit Ctrl + Space
+            enableLiveAutocompletion: true, // the editor completes the statement while you are typing
+            enableSnippets: true,
+            showPrintMargin: false, // hides the vertical limiting strip
+            fixedWidthGutter: true,
+            autoScrollEditorIntoView: true,
+            copyWithEmptySelection: true,
+            highlightActiveLine: false,
+        });
+
+        editor.setTheme("ace/theme/textmate");
+        // editor.setTheme("ace/theme/tomorrow_night_bright");
+        editor.container.style.lineHeight = 1.5;
+
+        editor_session[0] = ace.createEditSession(default_content, "ace/mode/python");
+        editor.setSession(editor_session[0]);
+        var active_editor_id = $('#editor-1').children('a');
+        var active_file_name = 'main.py';
+        var repl_host = get_host();
+        var command_list = [];
+        var command_index = 0;
+        var cur_cmd;
+        var hint_glow;
+
+        var y = document.getElementById('editor_footer');
+        var output = document.getElementById('output');
+        var exec_detail = document.getElementById('output-status');
+        var progress_status = document.getElementById('progress-status');
+
+        // $(function () {
+        //     $('[data-toggle="tooltip"]').tooltip({
+        //         delay: { show: 750, hide: 50 }
+        //     })
+        // });
+
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                delay: { "show": 0, hide: 0 }
+            })
+        });
+
+        $('.popover-dismiss').popover({
+            trigger: 'hover'
+        });
+
+
+        // $(".nav-tabs").on("click", "a", function (e) {
+        //     // e.stopPropagation();
+        //     e.preventDefault();
+        //     detail_chk = (e.detail === undefined) ? 1 : e.detail;
+        //     if (!$(this).hasClass('add-editor') && !$(this).children('input').hasClass('thVal') && detail_chk == 1) {
+        //         active_editor = parseInt($(this).parent().attr('id').split('-')[1]);
+        //         active_editor_id = $(this);
+
+        //         editor.setSession(editor_session[active_editor - 1]);
+        //         active_file_name = $(this).html();
+        //         $(this).tab('show');
+        //         editor.focus();
+        //         update_editor_footer();
+        //         undo_redo_update();
+        //     }
+        // })
+        //     .on("click", "span", function () {
+        //         close_tab = $(this).parent();
+        //         close_tab.children('a').click();
+        //         $('#close_file_title').text('Close - ' + active_file_name);
+        //         if (editor.getValue() === "") {
+        //             close_editor_tab();
+        //         }
+        //         else {
+        //             $("#closeEditorTab").modal('show');
+        //         }
+        //     });
+
+        $('#redo-editor').attr('disabled', 'disabled');
+        $('#undo-editor').attr('disabled', 'disabled');
+
+        // $('#rename_file').click(function (e) {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     active_editor_id.dblclick();
+        // });
+
+        $('#undo-editor').click(function (e) {
+            editor.session.getUndoManager().undo();
+            undo_redo_update();
+
+        });
+
+        $('#redo-editor').click(function (e) {
+            editor.session.getUndoManager().redo();
+            undo_redo_update();
+        });
+
+        editor.getSession().on('change', function () {
+            undo_redo_update();
+        });
+
+        let theme = localStorage.getItem('theme') !== undefined ? localStorage.getItem('theme') : 'light'
+
+        if (theme === 'dark') {
+            $('body').addClass('dark');
+            document.getElementById('toggle-theme').innerHTML = '<i class="fas fa-sun fa-lg"></i>';
+            editor.setTheme("ace/theme/tomorrow_night_bright");
+        }
+
+        $('#toggle-theme').click(function (e) {
+            document.body.classList.toggle('dark');
+            if ($('body').hasClass("dark")) {
+                editor.setTheme("ace/theme/tomorrow_night_bright");
+                document.getElementById('toggle-theme').innerHTML = '<i class="fas fa-sun fa-lg"></i>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                editor.setTheme("ace/theme/textmate");
+                document.getElementById('toggle-theme').innerHTML = '<i class="fas fa-moon fa-lg"></i>';
+                localStorage.setItem('theme', 'light');
+            }
+            $('#toggle-theme').blur();
+            $('[data-toggle="tooltip"]').tooltip('hide');
+        });
+
+        // $('.add-editor').click(function (e) {
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     editor_cnt += 1;
+        //     editor_index += 1;
+        //     var id = editor_cnt;
+
+        //     active_editor = id;
+        //     editor_session[active_editor - 1] = ace.createEditSession('', "ace/mode/python");
+        //     editor.setSession(editor_session[active_editor - 1]);
+
+        //     $(this).closest('li').before('<li id="editor-' + id + '"><a data-toggle="tab">Untitled' + id + '.py</a> <span> <i class="fa fa-times"></i></span></li>');
+        //     // $('.nav-tabs li:nth-child(' + id + ') a').click();
+
+        //     active_editor_id = $(".nav-tabs li").children('a').last();
+        //     active_editor_id.tab('show');
+        //     active_editor_id.dblclick();
+        //     update_editor_footer();
+        //     undo_redo_update();
+
+        //     editor.selection.on('changeCursor', function (e) {
+        //         update_editor_footer();
+        //     });
+
+        //     editor.selection.on('changeSelection', function (e) {
+        //         update_editor_footer();
+        //     });
+
+        //     editor.getSession().on('change', function () {
+        //         undo_redo_update();
+        //     });
+
+        // });
+
+        // $(document).on('dblclick', '.nav-tabs > li > a', function (event) {
+        //     if ($(event.target).attr('class') != "thVal") {
+        //         event.stopPropagation();
+        //         event.preventDefault();
+        //         var currentEle = $(this);
+        //         var value = $(this).html();
+        //         if (value.search('<input') === -1) updateVal(currentEle, value);
+        //     }
+        // });
+
+        // editor.focus();
+        // editor.navigateFileEnd();
+
+        // update_editor_footer();
+
+        // editor.selection.on('changeCursor', function (e) {
+        //     update_editor_footer();
+        // });
+
+        // editor.selection.on('changeSelection', function (e) {
+        //     update_editor_footer();
+        // });
+
+        // $('.status button').attr('disabled', 'disabled');
+        // $('#stop-btn').attr('disabled', 'disabled');
+
+        socket_options = {
+            transports: ["websocket"],
+            'timeout': 3000,
+            'connect timeout': 3000,
+            'reconnection': true,
+            'reconnectionDelay': 1000,
+            'reconnectionDelayMax': 5000,
+            'reconnectionAttempts': 5
+        };
+
+        socket_options['query'] = { type: "shell" };
+
+        // ace.config.loadModule("ace/ext/keybinding_menu", function(module) {
+        //     module.init(editor);
+        // });
+
+        $(document).keyup(function (e) {
+            IsCtrl = false;
+            IsShift = false;
+        }).keydown(function (e) {
+
+            // first capture Ctrl 
+            if (e.which == 17) { IsCtrl = true; }
+
+            // now capture Shift 
+            if (e.which == 16) { IsShift = true; }
+
+            switch (e.which) {
+
+                // now capture S and if Ctrl is pressed                                                                                                                                                                                          
+                // case 75: 
+                //     if (IsCtrl) { alert("Ctrl K pressed"); editor.showKeyboardShortcuts();} 
+                //     if (IsShift) { alert("Shift R pressed");  } 
+                //     e.preventDefault(); 
+                //     break;
+
+                // capture F8
+                case 119: run_python(); e.preventDefault(); break;
+                //F9
+                case 120: share_code_modal(); e.preventDefault(); break;
+                //F10
+                case 121: save_code_modal(); e.preventDefault(); break;
+
+                // capture ESC
+                // case 27: stop_python(); e.preventDefault(); break;
+            }
+        });
+
+        $('#output').on('click', function () {
+            $('#term-input').focus();
+        });
+
+    </script>
+
+    <!-- <script>
+        (function () {
+            if (typeof _bsa !== 'undefined' && _bsa) {
+                _bsa.init('stickybox', 'CEBICK3U', 'placement:wwwonline-pythoncom');
+            }
+        })();
+    </script> -->
+
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <!-- <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5e908e7d111adc12"></script> -->
+    
+    <dialog id="dialog">
+        <h2 id="dialog-title">Submission</h2>
+        <p id="dialog-text">You need to submit your code first.</p>
+        <button onclick="window.dialog.close();" aria-label="close" class="x">❌</button>
+    </dialog>
+</body>
+
+</html>

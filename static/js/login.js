@@ -7,6 +7,18 @@ let aContainer = document.querySelector("#a-container");
 let bContainer = document.querySelector("#b-container");
 let allButtons = document.querySelectorAll(".submit");
 
+let signin = () => {
+    // Submit sign in form
+    let form = document.querySelector("#form-signin");
+    form.submit();
+}
+
+let signup = () => {
+    // Submit sign up form
+    let form = document.querySelector("#form-signup");
+    form.submit();
+}
+
 let getButtons = (e) => e.preventDefault()
 
 let changeForm = (e) => {
@@ -35,3 +47,4 @@ let mainF = (e) => {
 }
 
 window.addEventListener("load", mainF);
+
